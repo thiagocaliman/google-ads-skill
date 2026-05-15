@@ -1,11 +1,12 @@
 ---
 name: google-ads-auditor
 description: Audita contas Google Ads via API oficial detectando falhas de setup (conversões, tracking, estrutura, remarketing, keywords, ads, budget). Baixa criativos para análise visual com IA. Gera relatórios em Markdown e HTML brutalist. Use quando o usuário pedir auditoria de Google Ads, diagnóstico de campanha, análise de conta Google Ads, revisão de setup, verificação de tracking, ou auditoria de tráfego pago Google.
-version: 1.0.0
-author: Thiago Caliman — AI PRO Revolution
 ---
 
 # Google Ads Auditor
+
+Versão: 1.0.0  
+Autor: Thiago Caliman — AI PRO Revolution
 
 ## Quando ativar
 
@@ -38,3 +39,4 @@ python scripts/auditor.py --customer-id=123-456-7890
 ```
 
 Comunidade AI PRO Revolution → aiprorevolution.com.br
+

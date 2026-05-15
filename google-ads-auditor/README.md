@@ -23,7 +23,8 @@ pip install -r requirements.txt
 copy templates\.env.template .env
 ```
 
-5. Preencha o `.env` com Developer Token, Client ID, Client Secret, Refresh Token, MCC e Customer ID.
+5. Preencha o `.env` com Developer Token, Client ID, Client Secret, Refresh Token e Customer ID.
+   Use `GOOGLE_ADS_LOGIN_CUSTOMER_ID` apenas quando houver uma conta administradora MCC gerenciando a conta auditada.
 6. Se ainda não tiver Refresh Token, rode:
 
 ```bash

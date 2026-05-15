@@ -18,11 +18,7 @@ class AuditoriaConversoes(AuditoriaBase):
         # Percorre cada ação de conversão retornada.
         for row in rows:
             conversao = row.conversion_action
-            metricas = row.metrics
             nome = conversao.name
-            # ⚠️ ERRO COMUM: conversão ativa sem volume indica tag quebrada ou evento errado.
-            if str(conversao.status).endswith("ENABLED") and metricas.conversions == 0:
-                criticos.append(f"{nome}: ativa, mas sem conversões nos últimos 30 dias.")
             if str(conversao.category).endswith("PURCHASE") and str(conversao.counting_type).endswith("MANY_PER_CLICK"):
                 criticos.append(f"{nome}: venda contando MANY_PER_CLICK; use ONE.")
             if not conversao.primary_for_goal:
@@ -31,8 +27,9 @@ class AuditoriaConversoes(AuditoriaBase):
                 avisos.append(f"{nome}: usa Last Click; avalie Data-Driven.")
             if str(conversao.category).endswith("OTHER"):
                 recomendacoes.append(f"{nome}: categoria OTHER; classifique corretamente.")
-            if metricas.conversions > 0:
-                ok.append(f"{nome}: conversão ativa com volume registrado.")
+            if str(conversao.status).endswith("ENABLED"):
+                ok.append(f"{nome}: conversão ativa encontrada.")
+        recomendacoes.append("Na API v24, valide volume por campanha e evento no painel de conversões.")
         return self.formatar_resultado("🔄 Auditoria de Conversões", criticos, avisos, ok, recomendacoes)
 
     def _query_gaql(self) -> str:
@@ -46,9 +43,7 @@ SELECT
   conversion_action.counting_type,
   conversion_action.primary_for_goal,
   conversion_action.attribution_model_settings.attribution_model,
-  conversion_action.click_through_lookback_window_days,
-  metrics.conversions,
-  metrics.all_conversions
+  conversion_action.click_through_lookback_window_days
 FROM conversion_action
 WHERE conversion_action.status != 'REMOVED'
 """

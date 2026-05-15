@@ -1,0 +1,8 @@
+*.env
+.env
+google-ads-auditor/.env
+google-ads-auditor/templates/.env
+google-ads-auditor/relatorios/
+google-ads-auditor/criativos_baixados/
+__pycache__/
+*.pyc

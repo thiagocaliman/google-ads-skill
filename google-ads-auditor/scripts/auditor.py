@@ -87,7 +87,16 @@ def _rodar_auditorias(client: Any, customer_id: str) -> List[Dict[str, Any]]:
     resultados = []
     # Executa com barra de progresso.
     for classe in track(classes, description="Rodando auditorias"):
-        resultados.append(classe(client, customer_id).executar())
+        try:
+            resultados.append(classe(client, customer_id).executar())
+        except Exception as erro:
+            resultados.append({
+                "titulo": f"⚠️ {classe.__name__}",
+                "criticos": [f"Auditoria não executada: {erro}"],
+                "avisos": [],
+                "ok": [],
+                "recomendacoes": ["Revisar compatibilidade GAQL desta seção com a versão atual da Google Ads API."],
+            })
     return resultados
 
 

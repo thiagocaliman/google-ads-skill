@@ -13,11 +13,16 @@ class AuditoriaKeywords(AuditoriaBase):
     def executar(self) -> Dict[str, List[str]]:
         rows = self.executar_query(self._query_gaql())
         criticos, avisos, ok, recomendacoes = [], [], [], []
+        keywords_vistas = set()
         for row in rows:
             criterio = row.ad_group_criterion
             keyword = criterio.keyword
             metricas = row.metrics
             texto = keyword.text
+            chave = texto.strip().lower()
+            if chave in keywords_vistas:
+                continue
+            keywords_vistas.add(chave)
             if criterio.quality_info.quality_score < 4 and metricas.cost_micros > 50_000_000:
                 criticos.append(f"{texto}: Quality Score < 4 e gasto acima de R$50.")
             if str(keyword.match_type).endswith("BROAD"):

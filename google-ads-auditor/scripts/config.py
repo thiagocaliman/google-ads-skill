@@ -14,7 +14,6 @@ VARIAVEIS_OBRIGATORIAS = [
     "GOOGLE_ADS_CLIENT_ID",
     "GOOGLE_ADS_CLIENT_SECRET",
     "GOOGLE_ADS_REFRESH_TOKEN",
-    "GOOGLE_ADS_LOGIN_CUSTOMER_ID",
     "GOOGLE_ADS_CUSTOMER_ID",
 ]
 
@@ -49,15 +48,20 @@ def carregar_credenciais() -> Dict[str, str]:
             f"Credenciais faltando no .env: {linhas}. "
             "Copie templates/.env.template e siga references/setup_developer_token.md."
         )
-    # Retorna o dict no formato aceito por GoogleAdsClient.load_from_dict().
-    return {
+    # Monta o dict no formato aceito por GoogleAdsClient.load_from_dict().
+    credenciais = {
         "developer_token": os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN", "").strip(),
         "client_id": os.getenv("GOOGLE_ADS_CLIENT_ID", "").strip(),
         "client_secret": os.getenv("GOOGLE_ADS_CLIENT_SECRET", "").strip(),
         "refresh_token": os.getenv("GOOGLE_ADS_REFRESH_TOKEN", "").strip(),
-        "login_customer_id": os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "").strip(),
         "use_proto_plus": True,
     }
+    # Usa login_customer_id só quando houver MCC real na hierarquia da conta auditada.
+    login_customer_id = os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "").strip()
+    # ⚠️ ERRO COMUM: preencher MCC errado causa USER_PERMISSION_DENIED mesmo com OAuth válido.
+    if login_customer_id:
+        credenciais["login_customer_id"] = login_customer_id
+    return credenciais
 
 
 def carregar_customer_id_padrao() -> str:
