@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI PRO Revolution | Auditoria Google Ads</title>
+  <style>{{ css_inline }}</style>
+</head>
+<body>
+  <main class="page">
+    <header class="card">
+      <img src="{{ logo_base64 }}" alt="AI PRO Revolution" style="width: 220px; max-width: 100%;">
+      <h1 style="font-size: 48px;">Auditoria Google Ads</h1>
+      <p class="label">Conta {{ customer_id }} | {{ data_geracao }}</p>
+    </header>
+
+    <section class="card">
+      <h2>Resumo executivo</h2>
+      <p><span class="badge critico">Críticos: {{ resumo.criticos }}</span></p>
+      <p><span class="badge aviso">Avisos: {{ resumo.avisos }}</span></p>
+      <p><span class="badge ok">OK: {{ resumo.ok }}</span></p>
+    </section>
+
+    {% for auditoria in resultados %}
+    <section class="card">
+      <h2>{{ auditoria.titulo }}</h2>
+      <h3>Críticos</h3>
+      <ul>{% for item in auditoria.criticos %}<li class="critico">{{ item }}</li>{% else %}<li>Nenhum crítico encontrado.</li>{% endfor %}</ul>
+      <h3>Avisos</h3>
+      <ul>{% for item in auditoria.avisos %}<li class="aviso">{{ item }}</li>{% else %}<li>Nenhum aviso encontrado.</li>{% endfor %}</ul>
+      <h3>OK</h3>
+      <ul>{% for item in auditoria.ok %}<li class="ok">{{ item }}</li>{% else %}<li>Nenhum item OK registrado.</li>{% endfor %}</ul>
+      <h3>Recomendações</h3>
+      <ul>{% for item in auditoria.recomendacoes %}<li>{{ item }}</li>{% else %}<li>Nenhuma recomendação adicional.</li>{% endfor %}</ul>
+    </section>
+    {% endfor %}
+
+    <section class="card">
+      <h2>Galeria de criativos analisados</h2>
+      {% for criativo in analises_criativos %}
+      <article class="card">
+        {% if criativo.imagem_base64 %}<img src="{{ criativo.imagem_base64 }}" alt="{{ criativo.arquivo }}" style="max-width: 360px; width: 100%; border: 2px solid var(--accent);">{% endif %}
+        <h3>{{ criativo.arquivo }}</h3>
+        <p>Copy principal: {{ criativo.copy_principal }}</p>
+        <p>CTA identificado: {{ criativo.cta_identificado }}</p>
+        <p>Legibilidade: {{ criativo.legibilidade }}/10 | Força visual: {{ criativo.forca_visual }}/10</p>
+      </article>
+      {% else %}
+      <p>Nenhum criativo visual foi analisado nesta auditoria.</p>
+      {% endfor %}
+    </section>
+  </main>
+  <footer class="card" style="position: sticky; bottom: 0; margin: 0;">
+    <strong>DESCUBRA MAIS NA COMUNIDADE → aiprorevolution.com.br</strong>
+  </footer>
+</body>
+</html>

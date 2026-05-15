@@ -1,0 +1,22 @@
+# Glossário Google Ads em PT-BR
+
+- GAQL: linguagem de consulta da Google Ads API.
+- MCC: conta administradora que gerencia várias contas Google Ads.
+- Developer Token: token que autoriza uso da API.
+- Refresh Token: credencial OAuth de longa duração.
+- Customer ID: ID de 10 dígitos da conta Google Ads.
+- Quality Score: nota de qualidade da keyword.
+- Ad Strength: força do anúncio responsivo.
+- Impression Share: parcela de impressões recebidas.
+- CTR: taxa de cliques.
+- CPC: custo por clique.
+- CPA: custo por aquisição.
+- ROAS: retorno sobre gasto em anúncios.
+- Broad: correspondência ampla.
+- Phrase: correspondência de frase.
+- Exact: correspondência exata.
+- Last Click: atribui conversão ao último clique.
+- Data-Driven: modelo orientado por dados.
+- Linear: distribui crédito entre interações.
+- One per click: conta uma conversão por clique.
+- Many per click: conta várias conversões por clique.

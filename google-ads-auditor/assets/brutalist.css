@@ -1,0 +1,63 @@
+:root {
+  --bg-base: #1a1a1a;
+  --bg-card: #242424;
+  --accent: #ff4d00;
+  --accent-dark: #cc3d00;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted: #6b6b6b;
+  --success: #00ff88;
+  --warning: #ffaa00;
+  --danger: #ff3366;
+  --border: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-base);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+  color: var(--text-primary);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--accent);
+  font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.label,
+code,
+pre {
+  font-family: 'Courier New', monospace;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 var(--accent);
+  margin: 24px 0;
+  padding: 24px;
+}
+
+.badge {
+  border-radius: 0;
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  text-transform: uppercase;
+}
+
+.critico { color: var(--danger); }
+.aviso { color: var(--warning); }
+.ok { color: var(--success); }
